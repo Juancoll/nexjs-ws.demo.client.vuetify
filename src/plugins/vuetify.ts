@@ -1,13 +1,12 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify';
+import Vue from "vue";
+import Vuetify from "vuetify";
 import colors from 'vuetify/es5/util/colors';
-import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
     theme: {
-        dark: true,
+        dark: false,
         options: {
             customProperties: true,
         },
@@ -29,10 +28,6 @@ export default new Vuetify({
                 warning: colors.yellow.base,
                 info: colors.blue.base,
                 success: colors.green.base,
-                newDark: {
-                    base: '#1e1e2f',
-                    lighten2: '#34384c',
-                },
             },
         },
     },

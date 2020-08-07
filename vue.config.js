@@ -1,27 +1,12 @@
 module.exports = {
-  runtimeCompiler: true,
-  publicPath: './',
-  configureWebpack: {
-
-    module: {
-      rules: [
-        {
-          test: /\.html$/,
-          loader: 'html-loader',
-        },
-        {
-          test: /\.md$/,
-          use: 'raw-loader',
-        },
-      ]
-    }
-  },
+  lintOnSave: false,
   pluginOptions: {
     i18n: {
-      locale: 'en',
-      fallbackLocale: 'en',
-      localeDir: 'locales',
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
       enableInSFC: false
     }
-  }
-}
+  },
+  transpileDependencies: ["vuetify"]
+};
