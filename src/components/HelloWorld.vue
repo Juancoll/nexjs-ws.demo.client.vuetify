@@ -2,12 +2,13 @@
     v-container
         v-row.text-center
             v-col(cols="12")
-                v-img(:src="require('../assets/icon_256.png')" class="my-3" contain height="200")            
+                v-img(:src="require('../assets/icons/icon_256.png')" class="my-3" contain height="200")            
 
             v-col.mb-4
                 h1.display-2.font-weight-bold.mb-3 Welcome to Vuetify
                 p.subheading.font-weight-regular For help and collaboration with other Vuetify developers,
-                    br please join our online
+                    br 
+                    please join our online
                     a(ref="https://community.vuetifyjs.com" target="_blank") Discord Community                
 
             v-col.mb-5(cols="12")

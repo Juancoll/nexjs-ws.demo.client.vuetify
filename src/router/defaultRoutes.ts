@@ -1,6 +1,12 @@
 import { IRouteMetadata } from '@/lib/router';
 
-import HomeView from '@/views/home/index';
+import HomeView from '@/views/Home.vue';
+import AboutView from '@/views/About.vue';
+
+import WSConnectionView from '@/views/websockets/WSConnection.vue';
+import WSContractAuth from '@/views/websockets/WSContractAuth.vue';
+import WSContractBase from '@/views/websockets/WSContractBase.vue';
+import WSContractCredentials from '@/views/websockets/WSContractCredentials.vue';
 
 import { RouteConfig } from 'vue-router';
 
@@ -19,107 +25,43 @@ export const routes: RouteConfig[] = [
         } as IRouteMetadata,
     },
     {
-        path: '/default/ws/doc',
-        name: 'default-ws-doc',
-        component: HomeView,
+        path: '/default/about',
+        name: 'default-about',
+        component: AboutView,
         meta: {
             showInToolbar: true,
             showInDrawer: true,
-            icon: 'mdi-file-document-box',
+            icon: 'mdi-home',
             iconColor: 'primary',
-            title: 'WS Doc',
-            subtitle: 'documentation',
+            title: 'About',
+            subtitle: 'default branch - About',
         } as IRouteMetadata,
     },
     {
-        path: '/default/ws/main',
-        name: 'default-ws-main',
-        component: HomeView,
+        path: '/default/ws',
+        name: 'default-ws',
+        component: WSConnectionView,
         meta: {
             showInToolbar: true,
             showInDrawer: true,
             icon: 'mdi-power-socket',
             iconColor: 'primary',
-            title: 'WS Main',
+            title: 'Websockets',
             subtitle: 'Connection and authentication',
         } as IRouteMetadata,
     },
     {
-        path: '/default/ws/services/demo',
-        name: 'default-ws-services-demo',
-        component: HomeView,
+        path: '/default/ws/contracts/auth',
+        name: 'default-ws-contracts-auth',
+        component: WSContractAuth,
         meta: {
             showInToolbar: false,
             showInDrawer: true,
-            icon: 'mdi-power-plug',
+            icon: 'mdi-power-socket',
             iconColor: 'primary',
-            title: 'WS demo',
-            subtitle: 'Demo ws service',
-        } as IRouteMetadata,
-    },
-    {
-        path: '/default/ws/services/custom',
-        name: 'default-ws-services-custom',
-        component: HomeView,
-        meta: {
-            showInToolbar: false,
-            showInDrawer: true,
-            icon: 'mdi-power-plug',
-            iconColor: 'primary',
-            title: 'WS custom',
-            subtitle: 'Custom ws service',
-        } as IRouteMetadata,
-    },
-    {
-        path: '/default/ws/services/db',
-        name: 'default-ws-services-db',
-        component: HomeView,
-        meta: {
-            showInToolbar: false,
-            showInDrawer: true,
-            icon: 'mdi-power-plug',
-            iconColor: 'primary',
-            title: 'WS db',
-            subtitle: 'Db ws service',
-        } as IRouteMetadata,
-    },
-    {
-        path: '/default/ws/services/jobs',
-        name: 'default-ws-services-jobs',
-        component: HomeView,
-        meta: {
-            showInToolbar: false,
-            showInDrawer: true,
-            icon: 'mdi-power-plug',
-            iconColor: 'primary',
-            title: 'WS jobs',
-            subtitle: 'Jobs ws service',
-        } as IRouteMetadata,
-    },
-    {
-        path: '/default/ws/services/orgs',
-        name: 'default-ws-services-orgs',
-        component: HomeView,
-        meta: {
-            showInToolbar: false,
-            showInDrawer: true,
-            icon: 'mdi-power-plug',
-            iconColor: 'primary',
-            title: 'WS orgs',
-            subtitle: 'Orgs ws service',
-        } as IRouteMetadata,
-    },
-    {
-        path: '/default/ws/services/users',
-        name: 'default-ws-services-users',
-        component: HomeView,
-        meta: {
-            showInToolbar: false,
-            showInDrawer: true,
-            icon: 'mdi-power-plug',
-            iconColor: 'primary',
-            title: 'WS users',
-            subtitle: 'Users ws service',
+            title: 'WS Contract Auth',
+            subtitle: '...',
+            parent: 'default-ws',
         } as IRouteMetadata,
     },
 ];
