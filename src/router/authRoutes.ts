@@ -1,8 +1,8 @@
 import { IRouteMetadata } from '@/lib/router';
 
 import { RouteConfig } from 'vue-router';
-import LoginView from '@/views/auth/login';
-import RegisterView from '@/views/auth/register';
+import LoginView from '@/views/auth/login.vue';
+import RegisterView from '@/views/auth/register.vue';
 
 export const routes: RouteConfig[] = [
     {

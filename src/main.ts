@@ -1,15 +1,17 @@
+import '@/assets/style/index.scss';
+
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import i18n from './plugins/i18n';
 import vuetify from './plugins/vuetify';
-import * as RouterMenuItem from '@/components/RouterMenuItem.vue';
+import Notifications from 'vue-notification';
 
-// Register recursive component as global (for production mode)
-Vue.component('RouterMenuItem', RouterMenuItem);
+Vue.use(Notifications);
 
 Vue.config.productionTip = false;
+
 
 new Vue({
   router,

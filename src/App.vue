@@ -1,42 +1,51 @@
-<template>
-    <v-app>
-        <v-app-bar app color="primary" dark>
-            <div class="d-flex align-center">
-                <v-img
-                    alt="Vuetify Logo"
-                    class="shrink mr-2"
-                    contain
-                    src="./assets/icons/icon_32.png"
-                    transition="scale-transition"
-                    width="40"
-                />
+<template lang="pug">
+    v-app
+        v-navigation-drawer(v-if="drawerEnabled" app v-model="showDrawer" clipped)
+            v-list(subheader two-line)
+                RouterMenuItem(v-for="(route, index) in drawerRoutes" :key="`drawer-item-${index}`" :route="route")
 
-                <v-img
-                    alt="Vuetify Name"
-                    class="shrink mt-1 hidden-sm-and-down"
-                    contain
-                    min-width="100"
-                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-                    width="100"
-                />
-            </div>
+        v-app-bar(app clipped-left color="dark" )
+            v-app-bar-nav-icon(v-if="drawerEnabled" @click="toggleDrawer")
+            v-toolbar-title.flex.h-container.items.v-center
+                img( v-bind:src="logo" alt='logo' style="height: 32px;")
+                div.flex.h-container.items.v-center
+                    div.primary--text(style="padding-left: 10px;") {{title}}
+                    div(style="padding-left: 10px;")  {{mode}}
 
-            <v-spacer></v-spacer>
+            v-spacer
+            v-toolbar-items
+            v-tooltip(bottom v-for="(route, index) in toolbarRoutes" :key="`toolbar-item-${index}`")
+                template(v-slot:activator="{ on }")
+                    v-btn(text @click="goToRoute(route)" v-on="on") {{route.meta.title}}
+                span {{route.meta.subtitle}}
 
-            <v-btn
-                href="https://github.com/vuetifyjs/vuetify/releases/latest"
-                target="_blank"
-                text
-            >
-                <span class="mr-2">Latest Release</span>
-                <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
-        </v-app-bar>
+            v-menu(v-if="showUserMenu" offset-y content-class="dropdown-menu" transition="slide-y-transition")
+                template(v-slot:activator="{ on }")
+                    v-btn.mx-2(color="primary" v-on="on" fab small) 
+                        v-icon mdi-account
+                v-list(style="min-width:150px")                
+                    v-list-item.pad-l-1(v-if="auth.isAuth" @click="logout()")
+                        v-list-item-title Logout
+                    v-list-item.pad-l-1(v-else @click="login")
+                        v-list-item-title login
+                    v-divider(v-if="showRolesInMenu")
+                    v-list-item.pad-l-1(v-if="showRolesInMenu" v-for="role in userValidRoles" :key="`toolbar-menu-item-${role}`" @click="changeRole(`${role}`)")
+                        v-list-item-title {{role}}
+                            
+        notifications(group="top" position="top center")
+        notifications(group="bottom" position="bottom right" )
 
-        <v-main>
-            <HelloWorld />
-        </v-main>
-    </v-app>
+        v-main.flex.v-container.overflow.full(v-resize="resize")
+            v-container(fill-height fluid)
+                router-view
+
+        v-footer(absolute app)
+            v-row
+                div(style="margin-left:10px" v-html="footer.left")
+                v-spacer
+                div(v-html="footer.center")
+                v-spacer
+                div(style="margin-right:10px" v-html="footer.right")
 </template>
 
 <script lang="ts">
@@ -51,7 +60,13 @@ import { RouterTools, BranchEventArgs } from '@/lib/router';
 import { authApp } from '@/services/authApp';
 import { IAuthUser } from '@/lib/authApp';
 
-@Component
+import RouterMenuItem from '@/components/RouterMenuItem.vue';
+
+@Component({
+    components: {
+        RouterMenuItem,
+    },
+})
 export default class RootView extends Vue {
     //#region [ data ]
     public logo = require('@/assets/icons/icon_256.png');
