@@ -7,14 +7,16 @@ import { env } from '@/services/env';
 import { LocalStorageRepository } from '@/lib/localStorage';
 
 export class WSAuthApp implements IAuthApp {
-    private _wsapi: WSApiBase<any, any>
-    private _repo = new LocalStorageRepository('authapp', true)
+    private _wsapi: WSApiBase<any, any>;
+    private _repo = new LocalStorageRepository('authapp', true);
 
     constructor(wsapi: WSApiBase<any, any>) {
         this._wsapi = wsapi;
         this._wsapi.auth.onAuthenticateChange.sub((value) => {
             this.onAuthenticate.dispatch(
-                this._wsapi.auth.authInfo ? this._wsapi.auth.authInfo.user : undefined,
+                this._wsapi.auth.authInfo
+                    ? this._wsapi.auth.authInfo.user
+                    : undefined,
             );
 
             if (this._wsapi.auth.authInfo) {
@@ -34,9 +36,11 @@ export class WSAuthApp implements IAuthApp {
         return this._wsapi.auth.authInfo ? true : false;
     }
     public get user(): IAuthUser | undefined | null {
-        return this._wsapi.auth.authInfo ? this._wsapi.auth.authInfo.user : undefined;
+        return this._wsapi.auth.authInfo
+            ? this._wsapi.auth.authInfo.user
+            : undefined;
     }
-    public readonly onAuthenticate = new SimpleEventDispatcher<IAuthUser | null>()
+    public readonly onAuthenticate = new SimpleEventDispatcher<IAuthUser | null>();
 
     public async register(data: any): Promise<IAuthUser> {
         if (!this._wsapi.ws.isConnected) {

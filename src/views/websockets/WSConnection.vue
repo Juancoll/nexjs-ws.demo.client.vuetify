@@ -1,11 +1,13 @@
 <template lang="pug">
     div.full.flex.v-container
         v-card
-            h1  @nexjs Websocket Connection
+            v-alert(outlined  type="warning"  border="left") See Action Result on browser Console. (Press F12 to open) 
+            h1  @nexjs Websocket Connection              
             v-text-field( :value="url" label="url")
             v-btn(@click="connect") connect
             v-btn(@click="disconnect") disconnect
-        v-card
+            br
+            br
             h1 @nexjs Websocket Auth Module
             v-row
                 v-col 
@@ -23,6 +25,7 @@
                     v-btn(@click="login") login
 
             v-btn(@click="logout") logout
+        router-view
 </template>
 
 <script lang="ts">

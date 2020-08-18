@@ -1,19 +1,21 @@
 <template lang="pug">
-    v-card
-        h1  @nexjs Websocket Connection
-        v-alert(outlined  type="warning"  border="left") Press F12 to open the browser Console. 
-        v-row
-            v-col 
-                v-btn(@click="subscribe") subscribe
-            v-col 
-                v-btn(@click="unsubscribe") unsubscribe
-        v-row
-            v-col 
-                v-btn(@click="print") print
-            v-col 
-                v-btn(@click="delay") delay
-            v-col 
-                v-btn(@click="notify") notify        
+    div.full.flex.v-container
+        v-card
+            h1  Base Contract
+            h3 Pub/Sub Protocol (Hub module)   
+            v-row
+                v-col 
+                    v-btn(@click="subscribe") subscribe
+                v-col 
+                    v-btn(@click="unsubscribe") unsubscribe
+            h3 Req/Res Protocol (Rest Module))        
+            v-row
+                v-col 
+                    v-btn(@click="print") print
+                v-col 
+                    v-btn(@click="delay") delay
+                v-col 
+                    v-btn(@click="notify") notify        
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';

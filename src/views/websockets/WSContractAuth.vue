@@ -1,26 +1,20 @@
 <template lang="pug">
-    div(style="text-align: left")
-        h2 @nexjs/ws - Auth Contract
-        ul
-            li
-                button(@click="register") register 
-                input(type="text" :value="registerEmail" )
-                input(type="text" :value="registerPassword" )
-            li
-                button(@click="login") login
-                input(type="text" :value="loginEmail")
-                input(type="text" :value="loginPassword")
-            li
-                button(@click="logout") logout
-            li
-                button(@click="subscribe") subscribe
-                button(@click="unsubscribe") unsubscribe
-            li
-                button(@click="print") send 
-                span demo.print()            
-            li
-                button(@click="notify") send 
-                span demo.notify()
+    div.full.flex.v-container
+        v-card
+            h1 Auth Contract
+            h3 Pub/Sub Protocol (Hub module)   
+            v-row
+                v-col 
+                    v-btn(@click="subscribe") subscribe
+                v-col 
+                    v-btn(@click="unsubscribe") unsubscribe
+                    
+            h3 Req/Res Protocol (Rest Module))           
+            v-row
+                v-col 
+                    v-btn(@click="print") print
+                v-col 
+                    v-btn(@click="notify") notify     
 </template>
 
 <script lang="ts">
@@ -101,27 +95,13 @@ export default class WSAuthContractComponent extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-button {
-    width: 100px;
-    height: 28px;
-    color: #ed1e79;
-    background-color: transparent;
-    border: #ed1e79;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+.v-card {
+    margin: 10px;
+    padding: 20px;
+    width: Calc(100% - 20px);
 }
-input {
-    height: 25px;
-    border: #ed1e79;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    margin-right: 5px;
-}
-h2 {
-    color: gray;
+.v-btn {
+    margin: 5px;
+    width: 100%;
 }
 </style>

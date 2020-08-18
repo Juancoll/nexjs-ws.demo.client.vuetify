@@ -1,4 +1,10 @@
-import { WSServiceBase, HubNotification, HubNotificationCredentials, HubNotificationCredentialsData, HubNotificationData } from '@nexjs/wsclient';
+import {
+    WSServiceBase,
+    HubNotification,
+    HubNotificationCredentials,
+    HubNotificationCredentialsData,
+    HubNotificationData,
+} from '@nexjs/wsclient';
 
 import { DataType } from '../../models/DataType';
 
@@ -10,22 +16,29 @@ export class CredentialsContractWSService extends WSServiceBase {
     //#region [ hub ]
 
     // isAuth: false
-    public readonly onUpdate = new HubNotificationCredentials<string>(this._hub, this.name, 'onUpdate');
+    public readonly onUpdate = new HubNotificationCredentials<string>(
+        this._hub,
+        this.name,
+        'onUpdate',
+    );
 
     // isAuth: false
-    public readonly onDataUpdate = new HubNotificationCredentialsData<string, DataType>(this._hub, this.name, 'onDataUpdate');
+    public readonly onDataUpdate = new HubNotificationCredentialsData<
+        string,
+        DataType
+    >(this._hub, this.name, 'onDataUpdate');
     //#endregion
 
     //#region [ rest ]
 
-     // isAuth: false
+    // isAuth: false
     public print(credentials: any): Promise<void> {
-        return this.request<void>( 'print', null, credentials );
+        return this.request<void>('print', null, credentials);
     }
 
-     // isAuth: false
+    // isAuth: false
     public notify(): Promise<void> {
-        return this.request<void>( 'notify', null, null );
+        return this.request<void>('notify', null, null);
     }
     //#endregion
 }

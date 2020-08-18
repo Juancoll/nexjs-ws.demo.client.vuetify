@@ -1,26 +1,20 @@
 export interface IEnvironment {
-    mode: string
+    mode: string;
     i18n: {
-        locale: string
-        fallback_local: string
-    }
+        locale: string;
+        fallback_local: string;
+    };
     wsapi: {
-        url: string
-        path: string
-        nsp: string
-    }
+        url: string;
+        path: string;
+        nsp: string;
+    };
     defaults: {
-        login: {
-            user: {
-                email: string
-                password: string
-            }
-            player: {
-                name: string
-                serial: string
-            }
-        }
-    }
+        user: {
+            email: string;
+            password: string;
+        };
+    };
 }
 
 export class Environment {
@@ -41,17 +35,9 @@ export class Environment {
                 nsp: this.var('VUE_APP_WSAPI_NSP'),
             },
             defaults: {
-                login: {
-                    user: {
-                        email: this.var('VUE_APP_LOGIN_DEFAULT_USER_EMAIL'),
-                        password: this.var(
-                            'VUE_APP_LOGIN_DEFAULT_USER_PASSWORD',
-                        ),
-                    },
-                    player: {
-                        name: this.var('VUE_APP_LOGIN_DEFAULT_PLAYER_NAME'),
-                        serial: this.var('VUE_APP_LOGIN_DEFAULT_PLAYER_SERIAL'),
-                    },
+                user: {
+                    email: this.var('VUE_APP_DEFAULT_USER_EMAIL'),
+                    password: this.var('VUE_APP_DEFAULT_USER_PASSWORD'),
                 },
             },
         };

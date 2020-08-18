@@ -15,22 +15,26 @@ import moment from 'moment';
 @Component
 export default class HomeView extends Vue {
     public logo = require('@/assets/icons/icon_256.png');
+    public counter = 0;
 
     public send(): void {
-        events.$emit(K.toolbar.left, 'Hello from Home view');
+        events.$emit(
+            K.toolbar.left,
+            `Hello from Home view counter ${this.counter++}`,
+        );
     }
     public showNotifications(): void {
         this.$notify({
             group: 'top',
             title: `Device Timeout ${moment().calendar()}`,
             type: 'success',
-            text: `TEST ERROR`,
+            text: `Welcome from notification center`,
         });
         this.$notify({
             group: 'bottom',
             title: `Device Timeout ${moment().calendar()}`,
             type: 'error',
-            text: `TEST ERROR`,
+            text: `Welcome from notification center`,
         });
     }
 }

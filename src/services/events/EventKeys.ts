@@ -1,5 +1,5 @@
 // tslint:disable-next-line: variable-name
-export let EventKeys = {
+export const EventKeys = {
     toolbar: {
         left: 'toolbar.left',
         center: 'toolbar.center',

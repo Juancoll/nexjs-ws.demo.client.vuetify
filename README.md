@@ -1,10 +1,11 @@
 # vuetify-app
 ## Commands
 ``` powershell
-npm install     # Project setup
-npm run serve   # Compiles and hot-reloads for development
-npm run build   # Compiles and minifies for production
-npm run lint    # Lints and fixes files
+npm install         # Project setup
+npm run serve       # Compiles and hot-reloads for development
+npm run build       # Compiles and minifies for production
+npm run lint        # Lints and fixes files
+npm run ws:update   # update websocket client api from server project 
 ```
 
 ## Customize configuration

@@ -29,8 +29,8 @@ import { env } from '@/services/env';
 export default class LoginView extends Vue {
     //#region [ data ]
     public logo = require('@/assets/icons/icon_256.png');
-    public email: string = env.vars.defaults.login.user.email || '';
-    public password: string = env.vars.defaults.login.user.password || '';
+    public email: string = env.vars.defaults.user.email || '';
+    public password: string = env.vars.defaults.user.password || '';
     public isWaiting = false;
     //#endregion
 

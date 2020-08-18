@@ -23,13 +23,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import { errors } from '@/services/errors';
 import { authApp } from '@/services/authApp';
 import router from '@/router';
+import { env } from '@/services/env';
 
 @Component
 export default class RegisterView extends Vue {
     //#region [ data ]
     public logo = require('@/assets/icons/icon_256.png');
-    public email = '';
-    public password = '';
+    public email: string = env.vars.defaults.user.email || '';
+    public password: string = env.vars.defaults.user.password || '';
     public isWaiting = false;
     //#endregion
 

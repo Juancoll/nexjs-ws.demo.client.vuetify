@@ -8,7 +8,7 @@ export class User extends Model {
     public name: string;
     public surname: string;
 
-    constructor(init?: Partial<User>) { super(init); }
-
-
+    constructor(init?: Partial<User>) {
+        super(init);
+    }
 }

@@ -28,7 +28,7 @@ export class RouterTools {
                 const parent = flat.find((x) => x.name == route.meta.parent);
                 if (!parent) {
                     console.error(
-                        `parent ${route.meta.parent} not found in route ${route.name}`
+                        `parent ${route.meta.parent} not found in route ${route.name}`,
                     );
                 } else {
                     if (!parent.children) {
