@@ -21,7 +21,7 @@ router.setBranches({
     default: {
         name: 'default',
         routes: defaultRoutes,
-        startup: '/default/ws/main',
+        startup: '/default/ws',
     },
     authenticate: {
         anyRole: {
@@ -58,30 +58,30 @@ router.setBranches({
 router.onBranchChange.sub((e) => {
     console.log(
         `[router] onBranchChange({from: '${
-            e.from ? e.from.name : 'undefined'
+        e.from ? e.from.name : 'undefined'
         }', to: '${e.to.name}')`,
     );
 });
 router.onRouteChange.sub((e) => {
     console.log(
         `[router] onRouteChange({from: '${
-            e.from ? e.from.path : 'undefined'
+        e.from ? e.from.path : 'undefined'
         }', to: '${e.to.path}')`,
     );
 });
 router.onBeforeEach.sub((e) => {
     console.log(
         `[router] onBeforeEach({from: '${
-            e.from ? e.from.path : 'undefined'
+        e.from ? e.from.path : 'undefined'
         }', to: '${e.to.path}')`,
     );
 });
 router.onAfterEach.sub((e) => {
     console.log(
         `[router] onAfterEach({from: '${
-            e.from ? e.from.path : 'undefined'
+        e.from ? e.from.path : 'undefined'
         }', to: '${e.to.path}')`,
     );
 })
-;(window as any).router = router;
+    ; (window as any).router = router;
 export default router;

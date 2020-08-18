@@ -1,30 +1,22 @@
 module.exports = {
-    root: true,
-    env: {
-        node: true,
-    },
+    plugins: ['prettier'],
     extends: [
+        'plugin:prettier/recommended',
         'plugin:vue/essential',
-        'eslint:recommended',
         '@vue/typescript/recommended',
         '@vue/prettier',
         '@vue/prettier/@typescript-eslint',
     ],
-    parserOptions: {
-        ecmaVersion: 2020,
-    },
     rules: {
-        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        '@typescript-eslint/no-this-alias': [
+        'prettier/prettier': [
             'error',
             {
-                allowDestructuring: true, // Allow `const { props, state } = this`; false by default
-                allowedNames: ['self'], // Allow `const self = this`; `[]` by default
+                trailingComma: 'all',
+                tabWidth: 4,
+                semi: true,
+                singleQuote: true,
+                endOfLine: 'auto',
             },
         ],
-        indent: ['error', 4],
-        quotes: ['error', 'single'],
-        semi: ['error', 'always'],
     },
 };

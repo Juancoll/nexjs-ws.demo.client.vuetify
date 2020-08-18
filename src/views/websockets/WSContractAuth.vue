@@ -16,9 +16,11 @@
                 button(@click="subscribe") subscribe
                 button(@click="unsubscribe") unsubscribe
             li
-                button(@click="print") send demo.print()                
+                button(@click="print") send 
+                span demo.print()            
             li
-                button(@click="notify") send demo.notify()
+                button(@click="notify") send 
+                span demo.notify()
 </template>
 
 <script lang="ts">
@@ -132,3 +134,28 @@ export default class WSAuthContractComponent extends Vue {
     }
 }
 </script>
+<style lang="scss" scoped>
+button {
+    width: 100px;
+    height: 28px;
+    color: #ed1e79;
+    background-color: transparent;
+    border: #ed1e79;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+input {
+    height: 25px;
+    border: #ed1e79;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+h2 {
+    color: gray;
+}
+</style>

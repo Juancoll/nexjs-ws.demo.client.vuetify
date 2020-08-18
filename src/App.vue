@@ -37,7 +37,8 @@
 
         v-main.flex.v-container.overflow.full(v-resize="resize")
             v-container(fill-height fluid)
-                router-view
+                transition(name="fade")
+                    router-view
 
         v-footer(absolute app)
             v-row
@@ -49,18 +50,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { RouteConfig } from 'vue-router';
+import Vue from "vue";
+import Component from "vue-class-component";
+import { RouteConfig } from "vue-router";
 
-import { env } from '@/services/env';
-import router from '@/router';
-import { RouterTools, BranchEventArgs } from '@/lib/router';
+import { env } from "@/services/env";
+import router from "@/router";
+import { RouterTools, BranchEventArgs } from "@/lib/router";
 
-import { authApp } from '@/services/authApp';
-import { IAuthUser } from '@/lib/authApp';
+import { authApp } from "@/services/authApp";
+import { IAuthUser } from "@/lib/authApp";
 
-import RouterMenuItem from '@/components/RouterMenuItem.vue';
+import RouterMenuItem from "@/components/RouterMenuItem.vue";
 
 @Component({
     components: {
@@ -69,14 +70,14 @@ import RouterMenuItem from '@/components/RouterMenuItem.vue';
 })
 export default class RootView extends Vue {
     //#region [ data ]
-    public logo = require('@/assets/icons/icon_256.png');
-    public title = 'wsapi demo';
+    public logo = require("@/assets/icons/icon_256.png");
+    public title = "wsapi demo";
     public showDrawer = false;
     public footer = {
         // eslint-disable-next-line quotes
         left: "<span style='color:red'><b>STATUS</b></span>",
-        center: '',
-        right: '&copy; ne)( group',
+        center: "",
+        right: "&copy; ne)( group",
     };
     public userValidRoles: string[] = [];
     public showUserMenu = true;
@@ -90,8 +91,8 @@ export default class RootView extends Vue {
     //#region  [ computed ]
     public get mode(): string {
         const mode = env.vars.mode as string;
-        if (mode == 'production') {
-            return '';
+        if (mode == "production") {
+            return "";
         }
         return `(${mode})`;
     }
@@ -99,7 +100,7 @@ export default class RootView extends Vue {
 
     constructor() {
         super();
-        console.log('[App.vue] constructor');
+        console.log("[App.vue] constructor");
     }
 
     //#region  [ methods ]
@@ -112,15 +113,15 @@ export default class RootView extends Vue {
     resize(): void {
         this.$set(
             this.footer,
-            'center',
-            JSON.stringify({ x: window.innerWidth, y: window.innerHeight }),
+            "center",
+            JSON.stringify({ x: window.innerWidth, y: window.innerHeight })
         );
     }
     logout(): void {
         authApp.logout();
     }
     login(): void {
-        router.pushIfNotCurrent('/auth/login');
+        router.pushIfNotCurrent("/auth/login");
     }
     changeRole(role: string): void {
         router.updateRole(role);
@@ -136,10 +137,10 @@ export default class RootView extends Vue {
     private onRouterBranchChange(e: BranchEventArgs) {
         const routes = e.to.routes;
         this.drawerRoutes = RouterTools.flatRoutes(routes).filter(
-            (x: RouteConfig) => x.meta && x.meta.showInDrawer,
+            (x: RouteConfig) => x.meta && x.meta.showInDrawer
         );
         this.toolbarRoutes = RouterTools.flatRoutes(routes).filter(
-            (x: RouteConfig) => x.meta && x.meta.showInToolbar,
+            (x: RouteConfig) => x.meta && x.meta.showInToolbar
         );
     }
     //#endregion
@@ -181,3 +182,19 @@ export default class RootView extends Vue {
     //#endregion
 }
 </script>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition-property: opacity;
+    transition-duration: 0.25s;
+}
+
+.fade-enter-active {
+    transition-delay: 0.25s;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
+</style>
