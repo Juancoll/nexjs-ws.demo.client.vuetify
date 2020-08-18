@@ -10,5 +10,6 @@
     "explorer.compactFolders": false,
     "editor.formatOnSave": true,
     "vetur.format.options.tabSize": 4,
-    "vetur.format.defaultFormatter.html": "prettier"
+    "vetur.format.defaultFormatter.html": "prettier",
+    "vetur.experimental.templateInterpolationService": true
 }

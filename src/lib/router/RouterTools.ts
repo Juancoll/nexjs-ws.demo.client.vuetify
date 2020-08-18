@@ -17,7 +17,7 @@ export class RouterTools {
         return list;
     }
     public static createMenuRoutes(routes: RouteConfig[]): RouteConfig[] {
-    const routesCopy = JSON.parse(JSON.stringify(routes)) as RouteConfig[];
+        const routesCopy = JSON.parse(JSON.stringify(routes)) as RouteConfig[];
 
         const flat = RouterTools.flatRoutes(routesCopy);
         const list = new Array<RouteConfig>();

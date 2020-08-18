@@ -2,6 +2,7 @@ import { IRouteMetadata } from '@/lib/router';
 
 import HomeView from '@/views/Home.vue';
 import AboutView from '@/views/About.vue';
+import FeaturesView from '@/views/Features.vue';
 
 import WSConnectionView from '@/views/websockets/WSConnection.vue';
 import WSContractAuth from '@/views/websockets/WSContractAuth.vue';
@@ -31,10 +32,23 @@ export const routes: RouteConfig[] = [
         meta: {
             showInToolbar: true,
             showInDrawer: true,
-            icon: 'mdi-home',
+            icon: 'mdi-information',
             iconColor: 'primary',
             title: 'About',
             subtitle: 'default branch - About',
+        } as IRouteMetadata,
+    },
+    {
+        path: '/default/features',
+        name: 'default-features',
+        component: FeaturesView,
+        meta: {
+            showInToolbar: true,
+            showInDrawer: true,
+            icon: 'mdi-power-plug',
+            iconColor: 'primary',
+            title: 'Features',
+            subtitle: 'some usefull features',
         } as IRouteMetadata,
     },
     {
@@ -44,10 +58,10 @@ export const routes: RouteConfig[] = [
         meta: {
             showInToolbar: true,
             showInDrawer: true,
-            icon: 'mdi-power-socket',
+            icon: 'mdi-flash',
             iconColor: 'primary',
             title: 'Websockets',
-            subtitle: 'Connection and authentication',
+            subtitle: 'WS Connection',
         } as IRouteMetadata,
     },
     {
@@ -57,10 +71,10 @@ export const routes: RouteConfig[] = [
         meta: {
             showInToolbar: false,
             showInDrawer: true,
-            icon: 'mdi-power-socket',
+            icon: 'mdi-file-document',
             iconColor: 'secondary',
             title: 'Contract Base',
-            subtitle: '...',
+            subtitle: 'basics features',
             parent: 'default-ws',
         } as IRouteMetadata,
     },
@@ -71,10 +85,10 @@ export const routes: RouteConfig[] = [
         meta: {
             showInToolbar: false,
             showInDrawer: true,
-            icon: 'mdi-power-socket',
+            icon: 'mdi-file-document',
             iconColor: 'secondary',
             title: 'Contract Auth',
-            subtitle: '...',
+            subtitle: 'Require Authentication',
             parent: 'default-ws',
         } as IRouteMetadata,
     },
@@ -85,10 +99,10 @@ export const routes: RouteConfig[] = [
         meta: {
             showInToolbar: false,
             showInDrawer: true,
-            icon: 'mdi-power-socket',
+            icon: 'mdi-file-document',
             iconColor: 'secondary',
             title: 'Contract Credentials',
-            subtitle: '...',
+            subtitle: 'Require Credentials',
             parent: 'default-ws',
         } as IRouteMetadata,
     },

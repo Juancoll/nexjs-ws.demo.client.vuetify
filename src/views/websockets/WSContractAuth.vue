@@ -57,40 +57,6 @@ export default class WSAuthContractComponent extends Vue {
     }
     //#endregion
 
-    //#region [ auth methods ]
-    async register(): Promise<void> {
-        try {
-            console.log('[WSAuthContractComponent] register');
-            await wsapi.auth.register({
-                email: this.registerEmail,
-                password: this.registerPassword,
-            });
-        } catch (err) {
-            console.warn(err);
-        }
-    }
-
-    async login(): Promise<void> {
-        try {
-            console.log('[WSAuthContractComponent] login');
-            await wsapi.auth.login({
-                email: this.registerEmail,
-                password: this.registerPassword,
-            });
-        } catch (err) {
-            console.warn(err);
-        }
-    }
-    async logout(): Promise<void> {
-        try {
-            console.log('[WSAuthContractComponent] logout');
-            await wsapi.auth.logout();
-        } catch (err) {
-            console.warn(err);
-        }
-    }
-    //#endregion
-
     async subscribe(): Promise<void> {
         try {
             console.log('[WSAuthContractComponent] subscribe request');

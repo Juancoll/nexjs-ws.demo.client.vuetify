@@ -1,6 +1,6 @@
 <template lang="pug">
     v-app
-        v-navigation-drawer(v-if="drawerEnabled" app v-model="showDrawer" clipped)
+        v-navigation-drawer(v-if="drawerEnabled" app v-model="showDrawer" clipped :width="325")
             v-list(subheader two-line)
                 RouterMenuItem(v-for="(route, index) in drawerRoutes" :key="`drawer-item-${index}`" :route="route")
 
@@ -50,18 +50,20 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { RouteConfig } from "vue-router";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { RouteConfig } from 'vue-router';
 
-import { env } from "@/services/env";
-import router from "@/router";
-import { RouterTools, BranchEventArgs } from "@/lib/router";
+import { IAuthUser } from '@/lib/authApp';
+import { RouterTools, BranchEventArgs } from '@/lib/router';
 
-import { authApp } from "@/services/authApp";
-import { IAuthUser } from "@/lib/authApp";
+import { env } from '@/services/env';
+import { authApp } from '@/services/authApp';
+import { events, EventKeys as E } from '@/services/events';
 
-import RouterMenuItem from "@/components/RouterMenuItem.vue";
+import router from '@/router';
+
+import RouterMenuItem from '@/components/RouterMenuItem.vue';
 
 @Component({
     components: {
@@ -70,14 +72,14 @@ import RouterMenuItem from "@/components/RouterMenuItem.vue";
 })
 export default class RootView extends Vue {
     //#region [ data ]
-    public logo = require("@/assets/icons/icon_256.png");
-    public title = "wsapi demo";
+    public logo = require('@/assets/icons/icon_256.png');
+    public title = 'wsapi demo';
     public showDrawer = false;
     public footer = {
         // eslint-disable-next-line quotes
         left: "<span style='color:red'><b>STATUS</b></span>",
-        center: "",
-        right: "&copy; ne)( group",
+        center: '',
+        right: '&copy; ne)( group',
     };
     public userValidRoles: string[] = [];
     public showUserMenu = true;
@@ -91,8 +93,8 @@ export default class RootView extends Vue {
     //#region  [ computed ]
     public get mode(): string {
         const mode = env.vars.mode as string;
-        if (mode == "production") {
-            return "";
+        if (mode == 'production') {
+            return '';
         }
         return `(${mode})`;
     }
@@ -100,7 +102,7 @@ export default class RootView extends Vue {
 
     constructor() {
         super();
-        console.log("[App.vue] constructor");
+        console.log('[App.vue] constructor');
     }
 
     //#region  [ methods ]
@@ -113,15 +115,15 @@ export default class RootView extends Vue {
     resize(): void {
         this.$set(
             this.footer,
-            "center",
-            JSON.stringify({ x: window.innerWidth, y: window.innerHeight })
+            'center',
+            JSON.stringify({ x: window.innerWidth, y: window.innerHeight }),
         );
     }
     logout(): void {
         authApp.logout();
     }
     login(): void {
-        router.pushIfNotCurrent("/auth/login");
+        router.pushIfNotCurrent('/auth/login');
     }
     changeRole(role: string): void {
         router.updateRole(role);
@@ -136,11 +138,12 @@ export default class RootView extends Vue {
     }
     private onRouterBranchChange(e: BranchEventArgs) {
         const routes = e.to.routes;
-        this.drawerRoutes = RouterTools.flatRoutes(routes).filter(
-            (x: RouteConfig) => x.meta && x.meta.showInDrawer
+        this.drawerRoutes = RouterTools.createMenuRoutes(routes).filter(
+            (x: RouteConfig) => x.meta && x.meta.showInDrawer,
         );
+        console.log(this.drawerRoutes);
         this.toolbarRoutes = RouterTools.flatRoutes(routes).filter(
-            (x: RouteConfig) => x.meta && x.meta.showInToolbar
+            (x: RouteConfig) => x.meta && x.meta.showInToolbar,
         );
     }
     //#endregion
@@ -171,6 +174,16 @@ export default class RootView extends Vue {
         authApp.onAuthenticate.sub(this.onUpdateUser);
         router.onBranchChange.sub(this.onRouterBranchChange);
 
+        events.$on(E.toolbar.left, (data: string) =>
+            this.$set(this.footer, 'left', data),
+        );
+        events.$on(E.toolbar.center, (data: string) =>
+            this.$set(this.footer, 'center', data),
+        );
+        events.$on(E.toolbar.right, (data: string) =>
+            this.$set(this.footer, 'right', data),
+        );
+
         this.resize();
         this.onUpdateUser(authApp.user);
     }
@@ -182,7 +195,7 @@ export default class RootView extends Vue {
     //#endregion
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
     transition-property: opacity;

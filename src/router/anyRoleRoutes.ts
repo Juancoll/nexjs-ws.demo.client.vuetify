@@ -2,7 +2,7 @@ import { IRouteMetadata } from '@/lib/router';
 
 import { RouteConfig } from 'vue-router';
 
-import HomeView from '@/views/home/index';
+import HomeView from '@/views/Home.vue';
 
 export const routes: RouteConfig[] = [
     {

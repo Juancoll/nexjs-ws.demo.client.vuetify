@@ -1,19 +1,19 @@
 <template lang="pug">
-    div(style="text-align: left")
-        h2 @nexjs/ws - Base Contract
-        ul
-            li
-                button(@click="subscribe") subscribe
-                button(@click="unsubscribe") unsubscribe
-            li
-                button(@click="print") send 
-                span demo.print()
-            li
-                button(@click="delay") send  
-                span demo.delay()
-            li
-                button(@click="notify") send  
-                span demo.notify()        
+    v-card
+        h1  @nexjs Websocket Connection
+        v-alert(outlined  type="warning"  border="left") Press F12 to open the browser Console. 
+        v-row
+            v-col 
+                v-btn(@click="subscribe") subscribe
+            v-col 
+                v-btn(@click="unsubscribe") unsubscribe
+        v-row
+            v-col 
+                v-btn(@click="print") print
+            v-col 
+                v-btn(@click="delay") delay
+            v-col 
+                v-btn(@click="notify") notify        
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -97,27 +97,13 @@ export default class WSBaseContractComponent extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-button {
-    width: 100px;
-    height: 28px;
-    color: #ed1e79;
-    background-color: transparent;
-    border: #ed1e79;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+.v-card {
+    margin: 10px;
+    padding: 20px;
+    width: Calc(100% - 20px);
 }
-input {
-    height: 25px;
-    border: #ed1e79;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    margin-right: 5px;
-}
-h2 {
-    color: gray;
+.v-btn {
+    margin: 5px;
+    width: 100%;
 }
 </style>

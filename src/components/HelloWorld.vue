@@ -8,7 +8,7 @@
                 h1.display-2.font-weight-bold.mb-3 Welcome to Vuetify
                 p.subheading.font-weight-regular For help and collaboration with other Vuetify developers,
                     br 
-                    please join our online
+                    span please join our online
                     a(ref="https://community.vuetifyjs.com" target="_blank") Discord Community                
 
             v-col.mb-5(cols="12")

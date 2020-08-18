@@ -1,7 +1,7 @@
 <template lang="pug">
     v-list-group( @click="goToRoute(route)" v-if="children.length > 0" no-action)
         template( v-slot:activator)
-            v-list-item
+            v-list-item(style="padding: 0px")
                 v-list-item-icon
                     v-icon( :color="route.meta.iconColor") {{route.meta.icon}}
                 v-list-item-content

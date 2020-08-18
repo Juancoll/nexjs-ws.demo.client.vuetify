@@ -1,6 +1,6 @@
 import { IRouteMetadata } from '@/lib/router';
 
-import HomeView from '@/views/home/index';
+import HomeView from '@/views/Home.vue';
 
 import { RouteConfig } from 'vue-router';
 
