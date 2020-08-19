@@ -22,7 +22,7 @@ export class Environment {
     constructor() {
         this.vars = {} as IEnvironment;
     }
-    create() {
+    create(): void {
         this.vars = {
             mode: this.var('VUE_APP_MODE'),
             i18n: {
@@ -42,12 +42,12 @@ export class Environment {
             },
         };
     }
-    check() {
+    check(): void {
         this.checkExists('VUE_APP_MODE');
         this.checkExists('VUE_APP_I18N_LOCALE');
         this.checkExists('VUE_APP_I18N_FALLBACK_LOCALE');
     }
-    print() {
+    print(): void {
         // console.log('[Environment Variables]', this.vars);
     }
 

@@ -1,8 +1,6 @@
 import {
     WSServiceBase,
     HubNotification,
-    HubNotificationCredentials,
-    HubNotificationCredentialsData,
     HubNotificationData,
 } from '@nexjs/wsclient';
 

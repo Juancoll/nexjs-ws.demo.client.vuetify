@@ -3,7 +3,7 @@ import { VueRouterExtended } from '@/lib/router';
 
 export class Errors {
     //#region [ public ]
-    public catchError(error: any, router: VueRouterExtended) {
+    public catchError(error: any, router: VueRouterExtended): void {
         if (error.response) {
             if (error.response.status == 404) {
                 Swal.fire(

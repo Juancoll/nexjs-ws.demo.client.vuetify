@@ -131,7 +131,7 @@ export class VueRouterExtended extends Router {
     //#endregion
 
     //#region  [ public ]
-    public setBranches(branches: IBranches) {
+    public setBranches(branches: IBranches): void {
         if (!branches) {
             throw new Error("can't be undefined or null");
         }
@@ -179,11 +179,11 @@ export class VueRouterExtended extends Router {
     public get roles(): string[] {
         return this._roles;
     }
-    public updateUser(user?: IAuthUser | null) {
+    public updateUser(user?: IAuthUser | null): void {
         this._user = user;
         this.updateRole(this._user ? this.userValidRoles[0] : undefined);
     }
-    public updateRole(role?: string) {
+    public updateRole(role?: string): void {
         const oldBranch = this._currentBranch;
 
         if (!this._branches) {
@@ -277,11 +277,12 @@ export class VueRouterExtended extends Router {
         }).catch((e) => {
             console.log(
                 `[router] try to push existing current path = ${this._currentBranch.startup}`,
+                e,
             );
         });
     }
 
-    pushIfNotCurrent(path: string) {
+    pushIfNotCurrent(path: string): void {
         if (this.currentRoute.path != path) {
             this.push({ path });
         }

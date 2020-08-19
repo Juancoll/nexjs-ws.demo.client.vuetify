@@ -19,10 +19,10 @@ export class LocalStorageRepository {
         return !item
             ? undefined
             : this._encrypt
-                ? JSON.parse(atob(item))
-                : JSON.parse(item);
+            ? JSON.parse(atob(item))
+            : JSON.parse(item);
     }
     clear(): any {
-        const item = localStorage.removeItem(this._key);
+        localStorage.removeItem(this._key);
     }
 }

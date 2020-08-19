@@ -1,5 +1,4 @@
 import { Model } from './Model';
-import { ModelComponent } from './ModelComponent';
 
 export class User extends Model {
     public email: string;

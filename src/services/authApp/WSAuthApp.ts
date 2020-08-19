@@ -12,7 +12,7 @@ export class WSAuthApp implements IAuthApp {
 
     constructor(wsapi: WSApiBase<any, any>) {
         this._wsapi = wsapi;
-        this._wsapi.auth.onAuthenticateChange.sub((value) => {
+        this._wsapi.auth.onAuthenticateChange.sub(() => {
             this.onAuthenticate.dispatch(
                 this._wsapi.auth.authInfo
                     ? this._wsapi.auth.authInfo.user

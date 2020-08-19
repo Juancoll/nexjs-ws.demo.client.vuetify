@@ -25,5 +25,10 @@ module.exports = {
                 allowedNames: ['self'], // Allow `const self = this`; `[]` by default
             },
         ],
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': [
+            'error',
+            { allowArgumentsExplicitlyTypedAsAny: true },
+        ],
     },
 };

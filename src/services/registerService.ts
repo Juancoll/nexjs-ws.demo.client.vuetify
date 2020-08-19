@@ -3,7 +3,7 @@
  * @param {string} name - Register ser
  * @param {any} service - service instance
  */
-export const registerService = (name: string, service: any) => {
+export const registerService = (name: string, service: any): void => {
     if (!(window as any).services) {
         (window as any).services = {};
     }
