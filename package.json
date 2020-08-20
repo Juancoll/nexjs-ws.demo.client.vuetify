@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "ws:update": "nexjs ts ws up-client -s ../nexjs-ws.demo-project.server-nestjs -o ./src/lib/wsclient"
+    "ws:update": "nexjs ts ws up-client -s ../nexjs-ws.demo-project.server-nestjs -o ./src/lib/wsclient",
+    "http:update": "nexjs ts http up-client"
   },
   "dependencies": {
     "@nexjs/wsclient": "^1.0.6",
