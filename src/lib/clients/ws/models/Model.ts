@@ -23,44 +23,42 @@ export class Model {
         }
     }
 
+
     //#region [ Included Methods ]
-    public update(): void {
+        public update(): void {
         this.updatedAt = new Date().valueOf();
     }
-    public exists<T extends ModelComponent>(type: new () => T): boolean {
+        public exists<T extends ModelComponent>(type: new () => T): boolean {
         if (!this.components || this.components.length == 0) {
             return false;
         }
-        return (
-            this.components.find((x) => x._type == new type()._type) !=
-            undefined
-        );
+        return this.components.find(x => x._type == new type()._type) != undefined;
     }
-    public count<T extends ModelComponent>(type: new () => T): number {
+        public count<T extends ModelComponent>(type: new () => T): number {
         return this.get(type).length;
     }
-    public get<T extends ModelComponent>(type: new () => T): T[] {
+        public get<T extends ModelComponent>(type: new () => T): T[] {
         if (!this.components || this.components.length == 0) {
             return [];
         }
         const strType = new type()._type;
-        return this.components.filter((x) => x._type == strType) as T[];
+        return this.components.filter(x => x._type == strType) as T[];
     }
-    public first<T extends ModelComponent>(type: new () => T): T | undefined {
+        public first<T extends ModelComponent>(type: new () => T): T | undefined {
         if (!this.components || this.components.length == 0) {
             return undefined;
         }
         const strType = new type()._type;
-        return this.components.find((x) => x._type == strType) as T;
+        return this.components.find(x => x._type == strType) as T;
     }
-    public add(component: ModelComponent): void {
+        public add(component: ModelComponent): void {
         if (!this.components) {
             this.components = [];
         }
 
         this.components.push(component);
     }
-    public remove<T extends ModelComponent>(type: new () => T): void {
+        public remove<T extends ModelComponent>(type: new () => T): void {
         if (!this.components || this.components.length == 0) {
             throw new Error(`Components is empty`);
         }
@@ -77,13 +75,13 @@ export class Model {
             delete this.components;
         }
     }
-    public removeAll<T extends ModelComponent>(type: new () => T): void {
+        public removeAll<T extends ModelComponent>(type: new () => T): void {
         if (!this.components || this.components.length == 0) {
             throw new Error(`Components is empty`);
         }
 
         const strType = new type()._type;
-        this.components = this.components.filter((x) => x._type != strType);
+        this.components = this.components.filter(x => x._type != strType);
 
         if (this.components && this.components.length == 0) {
             delete this.components;

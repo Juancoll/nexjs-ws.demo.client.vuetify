@@ -6,16 +6,33 @@
                 div.flex.v-container
                     v-btn.primary( @click="send") send to status bar
                     v-btn.secondary(@click="showNotifications") show notification 
+            div
+                TSComponent
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { events, EventKeys as K } from '@/services/events';
 import moment from 'moment';
+import TSComponent from '@/components/TSComponent';
 
-@Component
-export default class HomeView extends Vue {
+@Component({
+    components: { TSComponent },
+})
+export default class FeaturesView extends Vue {
     public logo = require('@/assets/icons/icon_256.png');
     public counter = 0;
+
+    constructor() {
+        super();
+        console.log('[FeaturesView] constructor()');
+    }
+
+    mounted(): void {
+        console.log('[FeaturesView] mounted()');
+    }
+    destroyed(): void {
+        console.log('[FeaturesView] destroyed()');
+    }
 
     public send(): void {
         events.$emit(

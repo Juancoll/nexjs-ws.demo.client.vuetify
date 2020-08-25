@@ -7,20 +7,20 @@ import { env } from '@/services/env';
 import { LocalStorageRepository } from '@/lib/localStorage';
 
 export class WSAuthApp implements IAuthApp {
-    private _wsapi: WSApiBase<any, any>;
-    private _repo = new LocalStorageRepository('authapp', true);
+    private _repo = new LocalStorageRepository('ws-authapp', true);
 
-    constructor(wsapi: WSApiBase<any, any>) {
-        this._wsapi = wsapi;
-        this._wsapi.auth.onAuthenticateChange.sub(() => {
+    constructor(
+        private wsapi: WSApiBase<any, any>
+    ) {
+        this.wsapi.auth.onAuthenticateChange.sub(() => {
             this.onAuthenticate.dispatch(
-                this._wsapi.auth.authInfo
-                    ? this._wsapi.auth.authInfo.user
+                this.wsapi.auth.authInfo
+                    ? this.wsapi.auth.authInfo.user
                     : undefined,
             );
 
-            if (this._wsapi.auth.authInfo) {
-                this._repo.save(this._wsapi.auth.authInfo.token);
+            if (this.wsapi.auth.authInfo) {
+                this._repo.save(this.wsapi.auth.authInfo.token);
             } else {
                 this._repo.clear();
             }
@@ -32,51 +32,55 @@ export class WSAuthApp implements IAuthApp {
         }
     }
 
+    //#region [ IAuthApp ]
     public get isAuth(): boolean {
-        return this._wsapi.auth.authInfo ? true : false;
+        return this.wsapi.auth.authInfo ? true : false;
     }
-    public get user(): IAuthUser | undefined | null {
-        return this._wsapi.auth.authInfo
-            ? this._wsapi.auth.authInfo.user
-            : undefined;
+    public get user(): IAuthUser | null {
+        return this.wsapi.auth.authInfo
+            ? this.wsapi.auth.authInfo.user
+            : null;
     }
     public readonly onAuthenticate = new SimpleEventDispatcher<IAuthUser | null>();
 
     public async register(data: any): Promise<IAuthUser> {
-        if (!this._wsapi.ws.isConnected) {
-            await this._wsapi.ws.connectAsync(
+        if (!this.wsapi.ws.isConnected) {
+            await this.wsapi.ws.connectAsync(
                 env.vars.wsapi.url,
                 env.vars.wsapi.path,
                 env.vars.wsapi.nsp,
             );
         }
-        const res = await this._wsapi.auth.register(data);
+        const res = await this.wsapi.auth.register(data);
         return res.user;
     }
     public async login(data: any): Promise<IAuthUser> {
-        if (!this._wsapi.ws.isConnected) {
-            await this._wsapi.ws.connectAsync(
+        if (!this.wsapi.ws.isConnected) {
+            await this.wsapi.ws.connectAsync(
                 env.vars.wsapi.url,
                 env.vars.wsapi.path,
                 env.vars.wsapi.nsp,
             );
         }
-        const res = await this._wsapi.auth.login(data);
+        const res = await this.wsapi.auth.login(data);
         return res.user;
     }
     public async logout(): Promise<void> {
-        await this._wsapi.auth.logout();
-        this._wsapi.ws.disconnect();
+        await this.wsapi.auth.logout();
+        this.wsapi.ws.disconnect();
     }
+    //#endregion
 
+    //#region [ private ]
     private async authenticate(token: any): Promise<void> {
-        if (!this._wsapi.ws.isConnected) {
-            await this._wsapi.ws.connectAsync(
+        if (!this.wsapi.ws.isConnected) {
+            await this.wsapi.ws.connectAsync(
                 env.vars.wsapi.url,
                 env.vars.wsapi.path,
                 env.vars.wsapi.nsp,
             );
         }
-        await this._wsapi.auth.authenticate(token);
+        await this.wsapi.auth.authenticate(token);
     }
+    //#endregion
 }

@@ -22,7 +22,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { wsapi } from '@/services/wsapi';
 
 @Component
-export default class WSAuthContractComponent extends Vue {
+export default class WSAuthContractView extends Vue {
     registerEmail = 'juan@any.com';
     registerPassword = '123456';
 
@@ -31,12 +31,12 @@ export default class WSAuthContractComponent extends Vue {
 
     constructor() {
         super();
-        console.log('[WSAuthContractComponent] constructor()');
+        console.log('[WSAuthContractView] constructor()');
     }
 
     //#region [ Vue ]
     mounted(): void {
-        console.log('[WSAuthContractComponent] mounted()');
+        console.log('[WSAuthContractView] mounted()');
         wsapi.authContract.onUpdate.on(() =>
             console.log('[credentialContract] onUpdate'),
         );
@@ -45,7 +45,7 @@ export default class WSAuthContractComponent extends Vue {
         );
     }
     destroyed(): void {
-        console.log('[WSAuthContractComponent] destroyed()');
+        console.log('[WSAuthContractView] destroyed()');
         wsapi.authContract.onUpdate.off();
         wsapi.authContract.onDataUpdate.off();
     }
@@ -53,10 +53,10 @@ export default class WSAuthContractComponent extends Vue {
 
     async subscribe(): Promise<void> {
         try {
-            console.log('[WSAuthContractComponent] subscribe request');
+            console.log('[WSAuthContractView] subscribe request');
             await wsapi.authContract.onUpdate.sub('user-credentials-001');
             await wsapi.authContract.onDataUpdate.sub('user-credentials-002');
-            console.log('[WSAuthContractComponent] subscribe response');
+            console.log('[WSAuthContractView] subscribe response');
         } catch (err) {
             console.warn(err);
         }
@@ -64,10 +64,10 @@ export default class WSAuthContractComponent extends Vue {
 
     async unsubscribe(): Promise<void> {
         try {
-            console.log('[WSAuthContractComponent] unsubscribe request');
+            console.log('[WSAuthContractView] unsubscribe request');
             await wsapi.authContract.onUpdate.unsub();
             await wsapi.authContract.onDataUpdate.unsub();
-            console.log('[WSAuthContractComponent] unsubscribe response');
+            console.log('[WSAuthContractView] unsubscribe response');
         } catch (err) {
             console.warn(err);
         }
@@ -75,9 +75,9 @@ export default class WSAuthContractComponent extends Vue {
 
     async print(): Promise<void> {
         try {
-            console.log('[WSAuthContractComponent] print() request');
+            console.log('[WSAuthContractView] print() request');
             await wsapi.authContract.print();
-            console.log('[WSAuthContractComponent] print() response');
+            console.log('[WSAuthContractView] print() response');
         } catch (err) {
             console.warn(err);
         }
@@ -85,9 +85,9 @@ export default class WSAuthContractComponent extends Vue {
 
     async notify(): Promise<void> {
         try {
-            console.log('[WSAuthContractComponent] notify() request');
+            console.log('[WSAuthContractView] notify() request');
             await wsapi.authContract.notify();
-            console.log('[WSAuthContractComponent] notify() response');
+            console.log('[WSAuthContractView] notify() response');
         } catch (err) {
             console.warn(err);
         }

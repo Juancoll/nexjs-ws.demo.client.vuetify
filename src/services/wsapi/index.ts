@@ -1,8 +1,10 @@
-import { WSApi } from '@/lib/wsclient';
-import { User } from '@/lib/wsclient/models';
+import { WSApi } from '@/lib/clients/ws';
+import { User } from '@/lib/clients/ws/models';
 import { SocketIOClient, WSErrorCode } from '@nexjs/wsclient';
+import { registerService } from '../registerService';
 
 export const wsapi = new WSApi<User, string>(new SocketIOClient());
+registerService('wsapi', wsapi);
 
 //#region [ debug configuration ]
 // [ WS Base ]

@@ -9,6 +9,10 @@ import WSContractAuth from '@/views/websockets/WSContractAuth.vue';
 import WSContractBase from '@/views/websockets/WSContractBase.vue';
 import WSContractCredentials from '@/views/websockets/WSContractCredentials.vue';
 
+import HttpConnectionView from '@/views/http/HttpConnection.vue';
+import HttpDefaultView from '@/views/http/HttpDefault.vue';
+import HttpTestApiView from '@/views/http/HttpTest.vue';
+
 import { RouteConfig } from 'vue-router';
 
 export const routes: RouteConfig[] = [
@@ -108,4 +112,47 @@ export const routes: RouteConfig[] = [
             },
         ],
     },
+    {
+        path: '/default/http',
+        name: 'default-http',
+        component: HttpConnectionView,
+        meta: {
+            showInToolbar: true,
+            showInDrawer: true,
+            icon: 'mdi-flash',
+            iconColor: 'primary',
+            title: 'Http',
+            subtitle: 'Http Connection',
+        } as IRouteMetadata,
+        children: [
+            {
+                path: '/default/http/default',
+                name: 'default-http-default',
+                component: HttpDefaultView,
+                meta: {
+                    showInToolbar: false,
+                    showInDrawer: true,
+                    icon: 'mdi-file-document',
+                    iconColor: 'secondary',
+                    title: 'Http Default Api',
+                    subtitle: 'http api\'s',
+                    parent: 'default-http',
+                } as IRouteMetadata,
+            },
+            {
+                path: '/default/http/test',
+                name: 'default-http-test',
+                component: HttpTestApiView,
+                meta: {
+                    showInToolbar: false,
+                    showInDrawer: true,
+                    icon: 'mdi-file-document',
+                    iconColor: 'secondary',
+                    title: 'Http Test Api',
+                    subtitle: 'http api\'s',
+                    parent: 'default-http',
+                } as IRouteMetadata,
+            },
+        ]
+    }
 ];

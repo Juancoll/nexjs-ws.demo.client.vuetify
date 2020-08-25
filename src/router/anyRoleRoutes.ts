@@ -8,6 +8,10 @@ import WSContractAuth from '@/views/websockets/WSContractAuth.vue';
 import WSContractBase from '@/views/websockets/WSContractBase.vue';
 import WSContractCredentials from '@/views/websockets/WSContractCredentials.vue';
 
+import HttpConnectionView from '@/views/http/HttpConnection.vue';
+import HttpDefaultView from '@/views/http/HttpDefault.vue';
+import HttpTestApiView from '@/views/http/HttpTest.vue';
+
 export const routes: RouteConfig[] = [
     {
         path: '/any',
@@ -23,8 +27,8 @@ export const routes: RouteConfig[] = [
         } as IRouteMetadata,
     },
     {
-        path: '/default/ws',
-        name: 'default-ws',
+        path: '/any/ws',
+        name: 'any-ws',
         component: WSConnectionView,
         meta: {
             showInToolbar: true,
@@ -36,8 +40,8 @@ export const routes: RouteConfig[] = [
         } as IRouteMetadata,
         children: [
             {
-                path: '/default/ws/contracts/Base',
-                name: 'default-ws-contracts-base',
+                path: '/any/ws/contracts/Base',
+                name: 'any-ws-contracts-base',
                 component: WSContractBase,
                 meta: {
                     showInToolbar: false,
@@ -46,12 +50,12 @@ export const routes: RouteConfig[] = [
                     iconColor: 'secondary',
                     title: 'Contract Base',
                     subtitle: 'basics features',
-                    parent: 'default-ws',
+                    parent: 'any-ws',
                 } as IRouteMetadata,
             },
             {
-                path: '/default/ws/contracts/auth',
-                name: 'default-ws-contracts-auth',
+                path: '/any/ws/contracts/auth',
+                name: 'any-ws-contracts-auth',
                 component: WSContractAuth,
                 meta: {
                     showInToolbar: false,
@@ -60,12 +64,12 @@ export const routes: RouteConfig[] = [
                     iconColor: 'secondary',
                     title: 'Contract Auth',
                     subtitle: 'Require Authentication',
-                    parent: 'default-ws',
+                    parent: 'any-ws',
                 } as IRouteMetadata,
             },
             {
-                path: '/default/ws/contracts/credentials',
-                name: 'default-ws-contracts-credentials',
+                path: '/any/ws/contracts/credentials',
+                name: 'any-ws-contracts-credentials',
                 component: WSContractCredentials,
                 meta: {
                     showInToolbar: false,
@@ -74,9 +78,52 @@ export const routes: RouteConfig[] = [
                     iconColor: 'secondary',
                     title: 'Contract Credentials',
                     subtitle: 'Require Credentials',
-                    parent: 'default-ws',
+                    parent: 'any-ws',
                 } as IRouteMetadata,
             },
         ],
     },
+    {
+        path: '/any/http',
+        name: 'any-http',
+        component: HttpConnectionView,
+        meta: {
+            showInToolbar: true,
+            showInDrawer: true,
+            icon: 'mdi-flash',
+            iconColor: 'primary',
+            title: 'Http',
+            subtitle: 'Http Connection',
+        } as IRouteMetadata,
+        children: [
+            {
+                path: '/any/http/default',
+                name: 'any-http-default',
+                component: HttpDefaultView,
+                meta: {
+                    showInToolbar: false,
+                    showInDrawer: true,
+                    icon: 'mdi-file-document',
+                    iconColor: 'secondary',
+                    title: 'Http Default Api',
+                    subtitle: 'http api\'s',
+                    parent: 'any-http',
+                } as IRouteMetadata,
+            },
+            {
+                path: '/any/http/test',
+                name: 'any-http-test',
+                component: HttpTestApiView,
+                meta: {
+                    showInToolbar: false,
+                    showInDrawer: true,
+                    icon: 'mdi-file-document',
+                    iconColor: 'secondary',
+                    title: 'Http Test Api',
+                    subtitle: 'http api\'s',
+                    parent: 'any-http',
+                } as IRouteMetadata,
+            },
+        ]
+    }
 ];

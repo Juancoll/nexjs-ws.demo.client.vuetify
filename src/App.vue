@@ -73,7 +73,7 @@ import RouterMenuItem from '@/components/RouterMenuItem.vue';
 export default class RootView extends Vue {
     //#region [ data ]
     public logo = require('@/assets/icons/icon_256.png');
-    public title = 'wsapi demo';
+    public title = 'vuetify demo';
     public showDrawer = false;
     public footer = {
         // eslint-disable-next-line quotes
@@ -167,8 +167,8 @@ export default class RootView extends Vue {
                 router.isAuthRoute && !router.useDefault
                     ? false
                     : self.drawerRoutes.length > 0
-                    ? true
-                    : false;
+                        ? true
+                        : false;
         });
 
         authApp.onAuthenticate.sub(this.onUpdateUser);

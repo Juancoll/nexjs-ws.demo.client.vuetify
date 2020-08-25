@@ -22,16 +22,16 @@ import { Component, Vue } from 'vue-property-decorator';
 import { wsapi } from '@/services/wsapi';
 
 @Component
-export default class WSBaseContractComponent extends Vue {
+export default class WSBaseContractView extends Vue {
     url = 'http://localhost:3000';
 
     constructor() {
         super();
-        console.log('[WSBaseContractComponent] constructor()');
+        console.log('[WSBaseContractView] constructor()');
     }
 
     mounted(): void {
-        console.log('[WSBaseContractComponent] mounted()');
+        console.log('[WSBaseContractView] mounted()');
         wsapi.baseContract.onUpdate.on(() =>
             console.log('[baseContract] onUpdate'),
         );
@@ -40,17 +40,17 @@ export default class WSBaseContractComponent extends Vue {
         );
     }
     destroyed(): void {
-        console.log('[WSBaseContractComponent] destroyed()');
+        console.log('[WSBaseContractView] destroyed()');
         wsapi.baseContract.onUpdate.off();
         wsapi.baseContract.onDataUpdate.off();
     }
 
     async subscribe(): Promise<void> {
         try {
-            console.log('[WSBaseContractComponent] subscribe request');
+            console.log('[WSBaseContractView] subscribe request');
             await wsapi.baseContract.onUpdate.sub();
             await wsapi.baseContract.onDataUpdate.sub();
-            console.log('[WSBaseContractComponent] subscribe response');
+            console.log('[WSBaseContractView] subscribe response');
         } catch (err) {
             console.warn(err);
         }
@@ -58,10 +58,10 @@ export default class WSBaseContractComponent extends Vue {
 
     async unsubscribe(): Promise<void> {
         try {
-            console.log('[WSBaseContractComponent] unsubscribe request');
+            console.log('[WSBaseContractView] unsubscribe request');
             await wsapi.baseContract.onUpdate.unsub();
             await wsapi.baseContract.onDataUpdate.unsub();
-            console.log('[WSBaseContractComponent] unsubscribe response');
+            console.log('[WSBaseContractView] unsubscribe response');
         } catch (err) {
             console.warn(err);
         }
@@ -69,9 +69,9 @@ export default class WSBaseContractComponent extends Vue {
 
     async print(): Promise<void> {
         try {
-            console.log('[WSBaseContractComponent] print() request');
+            console.log('[WSBaseContractView] print() request');
             await wsapi.baseContract.print();
-            console.log('[WSBaseContractComponent] print() response');
+            console.log('[WSBaseContractView] print() response');
         } catch (err) {
             console.warn(err);
         }
@@ -79,9 +79,9 @@ export default class WSBaseContractComponent extends Vue {
 
     async delay(): Promise<void> {
         try {
-            console.log('[WSBaseContractComponent] delay() request');
+            console.log('[WSBaseContractView] delay() request');
             await wsapi.baseContract.delay(2000);
-            console.log('[WSBaseContractComponent] delay() response');
+            console.log('[WSBaseContractView] delay() response');
         } catch (err) {
             console.warn(err);
         }
@@ -89,9 +89,9 @@ export default class WSBaseContractComponent extends Vue {
 
     async notify(): Promise<void> {
         try {
-            console.log('[WSBaseContractComponent] notify() request');
+            console.log('[WSBaseContractView] notify() request');
             await wsapi.baseContract.notify();
-            console.log('[WSBaseContractComponent] notify() response');
+            console.log('[WSBaseContractView] notify() response');
         } catch (err) {
             console.warn(err);
         }
