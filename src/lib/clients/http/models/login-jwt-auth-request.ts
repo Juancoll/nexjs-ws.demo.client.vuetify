@@ -14,32 +14,20 @@
 /**
  *
  * @export
- * @interface PackageJson
+ * @interface LoginJwtAuthRequest
  */
-export interface PackageJson {
+export interface LoginJwtAuthRequest {
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof LoginJwtAuthRequest
      */
-    name?: string;
+    email: string;
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof LoginJwtAuthRequest
      */
-    version?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    description?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    author?: string;
+    password: string;
 }
 

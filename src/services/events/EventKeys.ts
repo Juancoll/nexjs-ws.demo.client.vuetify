@@ -5,4 +5,4 @@ export const EventKeys = {
         center: 'toolbar.center',
         right: 'toolbar.right',
     },
-};
+}

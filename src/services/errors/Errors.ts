@@ -1,54 +1,54 @@
-import Swal from 'sweetalert2';
-import { VueRouterExtended } from '@/lib/router';
+import Swal from 'sweetalert2'
+import { VueRouterExtended } from '@/lib/router'
 
 export class Errors {
     //#region [ public ]
-    public catchError(error: any, router: VueRouterExtended): void {
-        if (error.response) {
-            if (error.response.status == 404) {
+    public catchError ( error: any, router: VueRouterExtended ): void {
+        if ( error.response ) {
+            if ( error.response.status == 404 ) {
                 Swal.fire(
                     'Ops!',
                     `Error: ${error.response.statusText}`,
                     'error',
-                );
-            } else if (error.response.status == 401) {
-                if (router.currentRoute.path != '/login') {
-                    router.pushIfNotCurrent('/login');
+                )
+            } else if ( error.response.status == 401 ) {
+                if ( router.currentRoute.path != '/login' ) {
+                    router.pushIfNotCurrent( '/login' )
                 }
                 Swal.fire(
                     'Ops!',
                     `Error: ${error.response.statusText}`,
                     'error',
-                );
-            } else if (error.response.status == 500) {
+                )
+            } else if ( error.response.status == 500 ) {
                 Swal.fire(
                     'Ops!',
                     `Error: ${error.response.statusText}`,
                     'error',
-                );
+                )
             } else {
-                const keys = ['data', 'message', 0, 'constraints'];
-                let result = error.response;
-                keys.forEach((type) => {
-                    console.log(result, type, result[type]);
+                const keys = ['data', 'message', 0, 'constraints']
+                let result = error.response
+                keys.forEach( ( type ) => {
+                    console.log( result, type, result[type] )
                     if (
                         result[type] &&
-                        (typeof result == 'string'
+                        ( typeof result == 'string'
                             ? result[type as number].length > 1
-                            : true)
+                            : true )
                     ) {
-                        result = result[type];
+                        result = result[type]
                     }
-                });
-                const json = JSON.stringify(result);
-                const objError = JSON.parse(json);
-                console.error(objError);
-                Swal.fire('Ops!', `Error: ${json}`, 'error');
+                } )
+                const json = JSON.stringify( result )
+                const objError = JSON.parse( json )
+                console.error( objError )
+                Swal.fire( 'Ops!', `Error: ${json}`, 'error' )
             }
-        } else if (error.message) {
-            Swal.fire('Ops!', `Error: ${error.message}`, 'error');
+        } else if ( error.message ) {
+            Swal.fire( 'Ops!', `Error: ${error.message}`, 'error' )
         } else {
-            console.error('Error', error.message);
+            console.error( 'Error', error.message )
         }
     }
     //#endregion

@@ -5,7 +5,7 @@
             v-alert(outlined  type="warning"  border="left") This is an about page
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class AboutView extends Vue {}
 </script>

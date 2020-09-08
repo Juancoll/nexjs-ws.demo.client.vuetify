@@ -14,32 +14,20 @@
 /**
  *
  * @export
- * @interface PackageJson
+ * @interface LoginLocalAuthRequest
  */
-export interface PackageJson {
+export interface LoginLocalAuthRequest {
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof LoginLocalAuthRequest
      */
-    name?: string;
+    email: string;
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof LoginLocalAuthRequest
      */
-    version?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    description?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    author?: string;
+    password: string;
 }
 

@@ -19,11 +19,17 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AuthJwtLoginResponseDto } from '../models';
+import { LoginJwtAuthRequest } from '../models';
 // @ts-ignore
-import { AuthLoginDto } from '../models';
+import { LoginJwtAuthResponse } from '../models';
 // @ts-ignore
-import { AuthUserDto } from '../models';
+import { LoginLocalAuthRequest } from '../models';
+// @ts-ignore
+import { LoginLocalAuthResponse } from '../models';
+// @ts-ignore
+import { RegisterAuthRequest } from '../models';
+// @ts-ignore
+import { RegisterAuthResponse } from '../models';
 /**
  * AuthApi - axios parameter creator
  * @export
@@ -32,14 +38,14 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
+         * @param {LoginJwtAuthRequest} loginJwtAuthRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerJwtLogin: async (authLoginDto: AuthLoginDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authLoginDto' is not null or undefined
-            if (authLoginDto === null || authLoginDto === undefined) {
-                throw new RequiredError('authLoginDto','Required parameter authLoginDto was null or undefined when calling authControllerJwtLogin.');
+        authControllerJwtLogin: async (loginJwtAuthRequest: LoginJwtAuthRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginJwtAuthRequest' is not null or undefined
+            if (loginJwtAuthRequest === null || loginJwtAuthRequest === undefined) {
+                throw new RequiredError('loginJwtAuthRequest','Required parameter loginJwtAuthRequest was null or undefined when calling authControllerJwtLogin.');
             }
             const localVarPath = `/api/auth/jwtLogin`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
@@ -60,8 +66,8 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             delete localVarUrlObj.search;
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof authLoginDto !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(authLoginDto !== undefined ? authLoginDto : {}) : (authLoginDto || "");
+            const needsSerialization = (typeof loginJwtAuthRequest !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(loginJwtAuthRequest !== undefined ? loginJwtAuthRequest : {}) : (loginJwtAuthRequest || "");
 
             return {
                 url: globalImportUrl.format(localVarUrlObj),
@@ -70,14 +76,52 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerLocalLogin: async (authLoginDto: AuthLoginDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authLoginDto' is not null or undefined
-            if (authLoginDto === null || authLoginDto === undefined) {
-                throw new RequiredError('authLoginDto','Required parameter authLoginDto was null or undefined when calling authControllerLocalLogin.');
+        authControllerJwtMe: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/jwtMe`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? configuration.accessToken()
+                    : configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {LoginLocalAuthRequest} loginLocalAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerLocalLogin: async (loginLocalAuthRequest: LoginLocalAuthRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginLocalAuthRequest' is not null or undefined
+            if (loginLocalAuthRequest === null || loginLocalAuthRequest === undefined) {
+                throw new RequiredError('loginLocalAuthRequest','Required parameter loginLocalAuthRequest was null or undefined when calling authControllerLocalLogin.');
             }
             const localVarPath = `/api/auth/localLogin`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
@@ -98,8 +142,8 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             delete localVarUrlObj.search;
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof authLoginDto !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(authLoginDto !== undefined ? authLoginDto : {}) : (authLoginDto || "");
+            const needsSerialization = (typeof loginLocalAuthRequest !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(loginLocalAuthRequest !== undefined ? loginLocalAuthRequest : {}) : (loginLocalAuthRequest || "");
 
             return {
                 url: globalImportUrl.format(localVarUrlObj),
@@ -137,14 +181,43 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerRegister: async (authLoginDto: AuthLoginDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authLoginDto' is not null or undefined
-            if (authLoginDto === null || authLoginDto === undefined) {
-                throw new RequiredError('authLoginDto','Required parameter authLoginDto was null or undefined when calling authControllerRegister.');
+        authControllerLocalMe: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/localMe`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {RegisterAuthRequest} registerAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerRegister: async (registerAuthRequest: RegisterAuthRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'registerAuthRequest' is not null or undefined
+            if (registerAuthRequest === null || registerAuthRequest === undefined) {
+                throw new RequiredError('registerAuthRequest','Required parameter registerAuthRequest was null or undefined when calling authControllerRegister.');
             }
             const localVarPath = `/api/auth/register`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
@@ -165,8 +238,8 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             delete localVarUrlObj.search;
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof authLoginDto !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(authLoginDto !== undefined ? authLoginDto : {}) : (authLoginDto || "");
+            const needsSerialization = (typeof registerAuthRequest !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(registerAuthRequest !== undefined ? registerAuthRequest : {}) : (registerAuthRequest || "");
 
             return {
                 url: globalImportUrl.format(localVarUrlObj),
@@ -184,12 +257,12 @@ export const AuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
+         * @param {LoginJwtAuthRequest} loginJwtAuthRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerJwtLogin(authLoginDto: AuthLoginDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthJwtLoginResponseDto>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerJwtLogin(authLoginDto, options);
+        async authControllerJwtLogin(loginJwtAuthRequest: LoginJwtAuthRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginJwtAuthResponse>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerJwtLogin(loginJwtAuthRequest, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -197,12 +270,24 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerLocalLogin(authLoginDto: AuthLoginDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthUserDto>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerLocalLogin(authLoginDto, options);
+        async authControllerJwtMe(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerJwtMe(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {LoginLocalAuthRequest} loginLocalAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerLocalLogin(loginLocalAuthRequest: LoginLocalAuthRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginLocalAuthResponse>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerLocalLogin(loginLocalAuthRequest, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -222,12 +307,24 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerRegister(authLoginDto: AuthLoginDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthUserDto>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerRegister(authLoginDto, options);
+        async authControllerLocalMe(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerLocalMe(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {RegisterAuthRequest} registerAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerRegister(registerAuthRequest: RegisterAuthRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RegisterAuthResponse>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).authControllerRegister(registerAuthRequest, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -244,21 +341,29 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
+         * @param {LoginJwtAuthRequest} loginJwtAuthRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerJwtLogin(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthJwtLoginResponseDto> {
-            return AuthApiFp(configuration).authControllerJwtLogin(authLoginDto, options).then((request) => request(axios, basePath));
+        authControllerJwtLogin(loginJwtAuthRequest: LoginJwtAuthRequest, options?: any): AxiosPromise<LoginJwtAuthResponse> {
+            return AuthApiFp(configuration).authControllerJwtLogin(loginJwtAuthRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerLocalLogin(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthUserDto> {
-            return AuthApiFp(configuration).authControllerLocalLogin(authLoginDto, options).then((request) => request(axios, basePath));
+        authControllerJwtMe(options?: any): AxiosPromise<void> {
+            return AuthApiFp(configuration).authControllerJwtMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {LoginLocalAuthRequest} loginLocalAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerLocalLogin(loginLocalAuthRequest: LoginLocalAuthRequest, options?: any): AxiosPromise<LoginLocalAuthResponse> {
+            return AuthApiFp(configuration).authControllerLocalLogin(loginLocalAuthRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -270,12 +375,20 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {AuthLoginDto} authLoginDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerRegister(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthUserDto> {
-            return AuthApiFp(configuration).authControllerRegister(authLoginDto, options).then((request) => request(axios, basePath));
+        authControllerLocalMe(options?: any): AxiosPromise<void> {
+            return AuthApiFp(configuration).authControllerLocalMe(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {RegisterAuthRequest} registerAuthRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerRegister(registerAuthRequest: RegisterAuthRequest, options?: any): AxiosPromise<RegisterAuthResponse> {
+            return AuthApiFp(configuration).authControllerRegister(registerAuthRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -288,21 +401,29 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
 export interface AuthApiInterface {
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
+     * @param {LoginJwtAuthRequest} loginJwtAuthRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authControllerJwtLogin(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthJwtLoginResponseDto>;
+    authControllerJwtLogin(loginJwtAuthRequest: LoginJwtAuthRequest, options?: any): AxiosPromise<LoginJwtAuthResponse>;
 
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authControllerLocalLogin(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthUserDto>;
+    authControllerJwtMe(options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {LoginLocalAuthRequest} loginLocalAuthRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApiInterface
+     */
+    authControllerLocalLogin(loginLocalAuthRequest: LoginLocalAuthRequest, options?: any): AxiosPromise<LoginLocalAuthResponse>;
 
     /**
      * 
@@ -314,12 +435,20 @@ export interface AuthApiInterface {
 
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authControllerRegister(authLoginDto: AuthLoginDto, options?: any): AxiosPromise<AuthUserDto>;
+    authControllerLocalMe(options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {RegisterAuthRequest} registerAuthRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApiInterface
+     */
+    authControllerRegister(registerAuthRequest: RegisterAuthRequest, options?: any): AxiosPromise<RegisterAuthResponse>;
 
 }
 
@@ -332,24 +461,34 @@ export interface AuthApiInterface {
 export class AuthApi extends BaseAPI implements AuthApiInterface {
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
+     * @param {LoginJwtAuthRequest} loginJwtAuthRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerJwtLogin(authLoginDto: AuthLoginDto, options?: any) {
-        return AuthApiFp(this.configuration).authControllerJwtLogin(authLoginDto, options).then((request) => request(this.axios, this.basePath));
+    public authControllerJwtLogin(loginJwtAuthRequest: LoginJwtAuthRequest, options?: any) {
+        return AuthApiFp(this.configuration).authControllerJwtLogin(loginJwtAuthRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerLocalLogin(authLoginDto: AuthLoginDto, options?: any) {
-        return AuthApiFp(this.configuration).authControllerLocalLogin(authLoginDto, options).then((request) => request(this.axios, this.basePath));
+    public authControllerJwtMe(options?: any) {
+        return AuthApiFp(this.configuration).authControllerJwtMe(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {LoginLocalAuthRequest} loginLocalAuthRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerLocalLogin(loginLocalAuthRequest: LoginLocalAuthRequest, options?: any) {
+        return AuthApiFp(this.configuration).authControllerLocalLogin(loginLocalAuthRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -364,13 +503,23 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
 
     /**
      * 
-     * @param {AuthLoginDto} authLoginDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerRegister(authLoginDto: AuthLoginDto, options?: any) {
-        return AuthApiFp(this.configuration).authControllerRegister(authLoginDto, options).then((request) => request(this.axios, this.basePath));
+    public authControllerLocalMe(options?: any) {
+        return AuthApiFp(this.configuration).authControllerLocalMe(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {RegisterAuthRequest} registerAuthRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerRegister(registerAuthRequest: RegisterAuthRequest, options?: any) {
+        return AuthApiFp(this.configuration).authControllerRegister(registerAuthRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
 }

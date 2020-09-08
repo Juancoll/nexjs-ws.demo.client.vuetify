@@ -8,8 +8,10 @@
         "**/node_modules": true
     },
     "explorer.compactFolders": false,
-    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
     "vetur.format.options.tabSize": 4,
-    "vetur.format.defaultFormatter.html": "prettier",
-    "vetur.experimental.templateInterpolationService": true
+    "vetur.format.enable": false,
+    "eslint.validate": ["typescript"]
 }

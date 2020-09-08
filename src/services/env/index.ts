@@ -1,10 +1,10 @@
-import { registerService } from '@/services/registerService';
-import { Environment } from './Environment';
+import { registerService } from '@/services/registerService'
+import { Environment } from './Environment'
 
-const env = new Environment();
-env.create();
-env.check();
-env.print();
+const env = new Environment()
+env.create()
+env.check()
+env.print()
 
-export { env };
-registerService('env', env);
+export { env }
+registerService( 'env', env )

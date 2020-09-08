@@ -2,24 +2,24 @@
     div.full.flex.v-container
         v-card
             h1 Auth Contract
-            h3 Pub/Sub Protocol (Hub module)   
+            h3 Pub/Sub Protocol (Hub module)
             v-row
-                v-col 
+                v-col
                     v-btn(@click="subscribe") subscribe
-                v-col 
+                v-col
                     v-btn(@click="unsubscribe") unsubscribe
-                    
-            h3 Req/Res Protocol (Rest Module))           
+
+            h3 Req/Res Protocol (Rest Module))
             v-row
-                v-col 
+                v-col
                     v-btn(@click="print") print
-                v-col 
-                    v-btn(@click="notify") notify     
+                v-col
+                    v-btn(@click="notify") notify
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { wsapi } from '@/services/wsapi';
+import { Component, Vue } from 'vue-property-decorator'
+import { wsapi } from '@/services/wsapi'
 
 @Component
 export default class WSAuthContractView extends Vue {
@@ -29,67 +29,67 @@ export default class WSAuthContractView extends Vue {
     loginEmail = 'juan@any.com';
     loginPassword = '123456';
 
-    constructor() {
-        super();
-        console.log('[WSAuthContractView] constructor()');
+    constructor () {
+        super()
+        console.log( '[WSAuthContractView] constructor()' )
     }
 
     //#region [ Vue ]
-    mounted(): void {
-        console.log('[WSAuthContractView] mounted()');
-        wsapi.authContract.onUpdate.on(() =>
-            console.log('[credentialContract] onUpdate'),
-        );
-        wsapi.authContract.onDataUpdate.on((data) =>
-            console.log('[credentialContract] onDataUpdate', data),
-        );
+    mounted (): void {
+        console.log( '[WSAuthContractView] mounted()' )
+        wsapi.authContract.onUpdate.on( () =>
+            console.log( '[credentialContract] onUpdate' ),
+        )
+        wsapi.authContract.onDataUpdate.on( ( data ) =>
+            console.log( '[credentialContract] onDataUpdate', data ),
+        )
     }
-    destroyed(): void {
-        console.log('[WSAuthContractView] destroyed()');
-        wsapi.authContract.onUpdate.off();
-        wsapi.authContract.onDataUpdate.off();
+    destroyed (): void {
+        console.log( '[WSAuthContractView] destroyed()' )
+        wsapi.authContract.onUpdate.off()
+        wsapi.authContract.onDataUpdate.off()
     }
     //#endregion
 
-    async subscribe(): Promise<void> {
+    async subscribe (): Promise<void> {
         try {
-            console.log('[WSAuthContractView] subscribe request');
-            await wsapi.authContract.onUpdate.sub('user-credentials-001');
-            await wsapi.authContract.onDataUpdate.sub('user-credentials-002');
-            console.log('[WSAuthContractView] subscribe response');
-        } catch (err) {
-            console.warn(err);
+            console.log( '[WSAuthContractView] subscribe request' )
+            await wsapi.authContract.onUpdate.sub( 'user-credentials-001' )
+            await wsapi.authContract.onDataUpdate.sub( 'user-credentials-002' )
+            console.log( '[WSAuthContractView] subscribe response' )
+        } catch ( err ) {
+            console.warn( err )
         }
     }
 
-    async unsubscribe(): Promise<void> {
+    async unsubscribe (): Promise<void> {
         try {
-            console.log('[WSAuthContractView] unsubscribe request');
-            await wsapi.authContract.onUpdate.unsub();
-            await wsapi.authContract.onDataUpdate.unsub();
-            console.log('[WSAuthContractView] unsubscribe response');
-        } catch (err) {
-            console.warn(err);
+            console.log( '[WSAuthContractView] unsubscribe request' )
+            await wsapi.authContract.onUpdate.unsub()
+            await wsapi.authContract.onDataUpdate.unsub()
+            console.log( '[WSAuthContractView] unsubscribe response' )
+        } catch ( err ) {
+            console.warn( err )
         }
     }
 
-    async print(): Promise<void> {
+    async print (): Promise<void> {
         try {
-            console.log('[WSAuthContractView] print() request');
-            await wsapi.authContract.print();
-            console.log('[WSAuthContractView] print() response');
-        } catch (err) {
-            console.warn(err);
+            console.log( '[WSAuthContractView] print() request' )
+            await wsapi.authContract.print()
+            console.log( '[WSAuthContractView] print() response' )
+        } catch ( err ) {
+            console.warn( err )
         }
     }
 
-    async notify(): Promise<void> {
+    async notify (): Promise<void> {
         try {
-            console.log('[WSAuthContractView] notify() request');
-            await wsapi.authContract.notify();
-            console.log('[WSAuthContractView] notify() response');
-        } catch (err) {
-            console.warn(err);
+            console.log( '[WSAuthContractView] notify() request' )
+            await wsapi.authContract.notify()
+            console.log( '[WSAuthContractView] notify() response' )
+        } catch ( err ) {
+            console.warn( err )
         }
     }
 }

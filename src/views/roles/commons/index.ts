@@ -1,6 +1,7 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator'
 
-@Component({
-    template: require('./template.pug'),
-})
-export default class CommonView extends Vue {}
+@Component( {
+    template: require( './template.pug' ),
+} )
+export default class CommonView extends Vue {
+}

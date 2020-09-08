@@ -11,35 +11,19 @@
  * Do not edit the class manually.
  */
 
+import { User } from './user'
+
 /**
  *
  * @export
- * @interface PackageJson
+ * @interface RegisterAuthResponse
  */
-export interface PackageJson {
+export interface RegisterAuthResponse {
     /**
      *
-     * @type {string}
-     * @memberof PackageJson
+     * @type {User}
+     * @memberof RegisterAuthResponse
      */
-    name?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    version?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    description?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    author?: string;
+    user: User;
 }
 

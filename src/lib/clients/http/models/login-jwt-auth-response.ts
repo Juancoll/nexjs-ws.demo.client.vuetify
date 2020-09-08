@@ -11,35 +11,25 @@
  * Do not edit the class manually.
  */
 
+import { User } from './user'
+
 /**
  *
  * @export
- * @interface PackageJson
+ * @interface LoginJwtAuthResponse
  */
-export interface PackageJson {
+export interface LoginJwtAuthResponse {
+    /**
+     *
+     * @type {User}
+     * @memberof LoginJwtAuthResponse
+     */
+    user: User;
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof LoginJwtAuthResponse
      */
-    name?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    version?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    description?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    author?: string;
+    token: string;
 }
 

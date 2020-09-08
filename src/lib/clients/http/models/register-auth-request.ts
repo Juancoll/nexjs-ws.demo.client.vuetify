@@ -14,32 +14,20 @@
 /**
  *
  * @export
- * @interface PackageJson
+ * @interface RegisterAuthRequest
  */
-export interface PackageJson {
+export interface RegisterAuthRequest {
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof RegisterAuthRequest
      */
-    name?: string;
+    email: string;
     /**
      *
      * @type {string}
-     * @memberof PackageJson
+     * @memberof RegisterAuthRequest
      */
-    version?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    description?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PackageJson
-     */
-    author?: string;
+    password: string;
 }
 
