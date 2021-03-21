@@ -1,6 +1,6 @@
 import { lib } from '../..'
 
-import { DataType } from '../../models/DataType'
+import { AnyData } from '../../models/AnyData'
 
 export class BaseContractWSService extends lib.WSServiceBase {
     //#region [ implement WSServiceBase ]
@@ -13,7 +13,7 @@ export class BaseContractWSService extends lib.WSServiceBase {
     public readonly onUpdate = new lib.HubEvent( this._hub, this.name, 'onUpdate' )
 
     // isAuth: false
-    public readonly onDataUpdate = new lib.HubEventData<DataType>( this._hub, this.name, 'onDataUpdate' )
+    public readonly onDataUpdate = new lib.HubEventData<AnyData>( this._hub, this.name, 'onDataUpdate' )
     //#endregion
 
     //#region [ rest ]

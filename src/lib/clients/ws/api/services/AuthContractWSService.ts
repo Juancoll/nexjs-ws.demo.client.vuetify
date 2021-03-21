@@ -1,6 +1,6 @@
 import { lib } from '../..'
 
-import { DataType } from '../../models/DataType'
+import { AnyData } from '../../models/AnyData'
 
 export class AuthContractWSService extends lib.WSServiceBase {
     //#region [ implement WSServiceBase ]
@@ -9,21 +9,21 @@ export class AuthContractWSService extends lib.WSServiceBase {
 
     //#region [ hub ]
 
-    // isAuth: true
-    public readonly onUpdate = new lib.HubEventSelector<string>( this._hub, this.name, 'onUpdate' )
+    // isAuth: false
+    public readonly onUpdate = new lib.HubEvent( this._hub, this.name, 'onUpdate' )
 
-    // isAuth: true
-    public readonly onDataUpdate = new lib.HubEventSelectorData<string, DataType>( this._hub, this.name, 'onDataUpdate' )
+    // isAuth: false
+    public readonly onDataUpdate = new lib.HubEventData<AnyData>( this._hub, this.name, 'onDataUpdate' )
     //#endregion
 
     //#region [ rest ]
 
-    // isAuth: true
+    // isAuth: false
     public print ( ): Promise<void> {
         return this.request<void>( 'print', null)
     }
 
-    // isAuth: true
+    // isAuth: false
     public notify ( ): Promise<void> {
         return this.request<void>( 'notify', null)
     }

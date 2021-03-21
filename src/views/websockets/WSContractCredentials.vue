@@ -23,8 +23,6 @@ import { wsapi } from '@/services/wsapi'
 
 @Component
 export default class WSCredentialContractView extends Vue {
-    url = 'http://localhost:3000';
-
     constructor () {
         super()
         console.log( '[WSCredentialContractView] constructor()' )
@@ -32,25 +30,62 @@ export default class WSCredentialContractView extends Vue {
 
     mounted (): void {
         console.log( '[WSCredentialContractView] mounted()' )
-        wsapi.credentialsContract.onUpdate.on( () =>
+        wsapi.credentialContract.onUpdate.on( () =>
             console.log( '[credentialContract] onUpdate' ),
         )
-        wsapi.credentialsContract.onDataUpdate.on( ( data ) =>
-            console.log( '[credentialContract] onDataUpdate', data ),
+        wsapi.credentialContract.onUpdateData.on( ( data ) =>
+            console.log( '[credentialContract] onUpdateData', data ),
+        )
+
+        wsapi.credentialContract.onUpdateSelection.on( () =>
+            console.log( '[credentialContract] onUpdateSelection' ),
+        )
+        wsapi.credentialContract.onUpdateSelectionData.on( ( data ) =>
+            console.log( '[credentialContract] onUpdateSelectionData', data ),
+        )
+
+        wsapi.credentialContract.onUpdateValidation.on( () =>
+            console.log( '[credentialContract] onUpdateValidation' ),
+        )
+        wsapi.credentialContract.onUpdateValidationData.on( ( data ) =>
+            console.log( '[credentialContract] onUpdateValidationData', data ),
+        )
+
+        wsapi.credentialContract.onUpdateValidationSelection.on( () =>
+            console.log( '[credentialContract] onUpdateValidationSelection' ),
+        )
+        wsapi.credentialContract.onUpdateValidationSelectionData.on( ( data ) =>
+            console.log( '[credentialContract] onUpdateValidationData', data ),
         )
     }
     destroyed (): void {
         console.log( '[WSCredentialContractView] destroyed()' )
-        wsapi.credentialsContract.onUpdate.off()
-        wsapi.credentialsContract.onDataUpdate.off()
+        wsapi.credentialContract.onUpdate.off()
+        wsapi.credentialContract.onUpdateData.off()
+        wsapi.credentialContract.onUpdateSelection.off()
+        wsapi.credentialContract.onUpdateSelectionData.off()
+        wsapi.credentialContract.onUpdateValidation.off()
+        wsapi.credentialContract.onUpdateValidationData.off()
+        wsapi.credentialContract.onUpdateValidationSelection.off()
+        wsapi.credentialContract.onUpdateValidationSelectionData.off()
     }
 
     async subscribe (): Promise<void> {
         try {
-            console.log( '[WSCredentialContractView] subscribe request' )
-            await wsapi.credentialsContract.onUpdate.sub( 'user-credentials-001' )
-            await wsapi.credentialsContract.onDataUpdate.sub( 'user-credentials-002' )
-            console.log( '[WSCredentialContractView] subscribe response' )
+            console.log( '[WSCredentialContractComponent] subscribe request' )
+            await wsapi.credentialContract.onUpdate.sub()
+            await wsapi.credentialContract.onUpdateData.sub()
+            await wsapi.credentialContract.onUpdateSelection.sub()
+            await wsapi.credentialContract.onUpdateSelectionData.sub()
+            await wsapi.credentialContract.onUpdateValidation.sub( 1234 )
+            await wsapi.credentialContract.onUpdateValidationData.sub( 1234 )
+            await wsapi.credentialContract.onUpdateValidationSelection.sub(
+                1234,
+            )
+            await wsapi.credentialContract.onUpdateValidationSelectionData.sub(
+                1234,
+            )
+            console.log( '[WSCredentialContractComponent] subscribe response' )
         } catch ( err ) {
             console.warn( err )
         }
@@ -58,10 +93,16 @@ export default class WSCredentialContractView extends Vue {
 
     async unsubscribe (): Promise<void> {
         try {
-            console.log( '[WSCredentialContractView] unsubscribe request' )
-            await wsapi.credentialsContract.onUpdate.unsub()
-            await wsapi.credentialsContract.onDataUpdate.unsub()
-            console.log( '[WSCredentialContractView] unsubscribe response' )
+            console.log( '[WSCredentialContractComponent] unsubscribe request' )
+            await wsapi.credentialContract.onUpdate.unsub()
+            await wsapi.credentialContract.onUpdateData.unsub()
+            await wsapi.credentialContract.onUpdateSelection.unsub()
+            await wsapi.credentialContract.onUpdateSelectionData.unsub()
+            await wsapi.credentialContract.onUpdateValidation.unsub()
+            await wsapi.credentialContract.onUpdateValidationData.unsub()
+            await wsapi.credentialContract.onUpdateValidationSelection.unsub()
+            await wsapi.credentialContract.onUpdateValidationSelectionData.unsub()
+            console.log( '[WSCredentialContractComponent] unsubscribe response' )
         } catch ( err ) {
             console.warn( err )
         }
@@ -69,9 +110,9 @@ export default class WSCredentialContractView extends Vue {
 
     async print (): Promise<void> {
         try {
-            console.log( '[WSCredentialContractView] print() request' )
-            await wsapi.credentialsContract.print( )
-            console.log( '[WSCredentialContractView] print() response' )
+            console.log( '[WSCredentialContractComponent] print() request' )
+            await wsapi.credentialContract.print()
+            console.log( '[WSCredentialContractComponent] print() response' )
         } catch ( err ) {
             console.warn( err )
         }
@@ -79,9 +120,9 @@ export default class WSCredentialContractView extends Vue {
 
     async notify (): Promise<void> {
         try {
-            console.log( '[WSCredentialContractView] notify() request' )
-            await wsapi.credentialsContract.notify()
-            console.log( '[WSCredentialContractView] notify() response' )
+            console.log( '[WSCredentialContractComponent] notify() request' )
+            await wsapi.credentialContract.notify()
+            console.log( '[WSCredentialContractComponent] notify() response' )
         } catch ( err ) {
             console.warn( err )
         }
